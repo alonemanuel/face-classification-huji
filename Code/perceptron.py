@@ -38,8 +38,9 @@ class perceptron:
 
     def fit(self, X, y):
         gc.log("Fitting")
-        self._X_train = X
-        self._y_train = y
+        # Init X and y vecs with place for the bias
+        self._X_train = np.c_[X, np.ones(X.shape[0])]
+        self._y_train = y.append(0)
         self.init_weights(X.shape[1])
         while True:
             # TODO: Plot perceptron converging
