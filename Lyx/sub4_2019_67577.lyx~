@@ -88,7 +88,7 @@ theorems-ams
 \begin_body
 
 \begin_layout Title
-IML (67577) - Exercise 3 - Classification
+IML (67577) - Exercise 4 - Boosting and SVM
 \end_layout
 
 \begin_layout Author
@@ -168,29 +168,68 @@ Alon Emanuel - 205894058
 \end_inset
 
 
+\begin_inset FormulaMacro
+\newcommand{\r}{\mathbb{R}}
+{\mathbb{R}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\norm}[1]{\left\Vert #1\right\Vert }
+{\left\Vert #1\right\Vert }
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
-Linear Regression and the Liklihood Function
+SVM - Formulation
 \end_layout
 
 \begin_layout Subsection*
-Q1.a
+Q1
 \end_layout
 
 \begin_layout Itemize
-First lets notice that for a sample set 
-\begin_inset Formula $S$
-\end_inset
+We claim that the following QP problem's objective is equivalent to the
+ Hard-SVM objective:
+\end_layout
 
- of size 
-\begin_inset Formula $m$
-\end_inset
-
-, the empirical likelihood-based loss is defined by
+\begin_deeper
+\begin_layout Standard
 \begin_inset Formula 
 \[
-L_{S}\left(h\right)=\prod_{i=1}^{m}l_{likelikhood}\left(h,\left(x_{i},y_{i}\right)\right)
+\begin{matrix}\underset{\text{\textbf{v}}\in\r^{n}}{\argmin}\left[\frac{1}{2}\begin{bmatrix}\vert\\
+\text{\textbf{w}}\\
+\vert\\
+b
+\end{bmatrix}^{T}I_{n}\begin{bmatrix}\vert\\
+\text{\textbf{w}}\\
+\vert\\
+b
+\end{bmatrix}+\text{\textbf{\ensuremath{\begin{bmatrix}0\\
+0\\
+\vdots\\
+0
+\end{bmatrix}}}}^{T}\text{\textbf{\begin{bmatrix}\vert\\
+ \text{\textbf{w}}\\
+ \vert\\
+ b 
+\end{bmatrix}}}\right]\\
+\text{s.t \ensuremath{\begin{bmatrix}- & -\text{\textbf{x}}_{1} & - & -1\\
+- & -\text{\textbf{x}}_{2} & - & -1\\
+ & \vdots\\
+- & -\text{\textbf{x}}_{m} & - & -1
+\end{bmatrix}\begin{bmatrix}\vert\\
+\text{\textbf{w}}\\
+\vert\\
+b
+\end{bmatrix}\ensuremath{\le\begin{bmatrix}-1\\
+-1\\
+\vdots\\
+-1
+\end{bmatrix}}}}
+\end{matrix}
 \]
 
 \end_inset
@@ -199,78 +238,111 @@ L_{S}\left(h\right)=\prod_{i=1}^{m}l_{likelikhood}\left(h,\left(x_{i},y_{i}\righ
 \end_layout
 
 \begin_layout Itemize
-Thus, our objective will be to find the best model that fits the data (ERM):
-\begin_inset Formula 
-\begin{align*}
-h^{*} & =\underset{h\in\H}{argmax}L_{S}\left(h\right)\\
- & =\underset{h\in\H}{argmax}\left[\frac{1}{\left(\sqrt{2\pi\sigma^{2}}\right)^{m}}\exp\left(\sum_{i=1}^{m}-\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}\right)\right]
-\end{align*}
-
+\begin_inset Formula $Q=I_{n}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\qed$
+, 
+\begin_inset Formula $\text{\textbf{v}}=\begin{bmatrix}\vert\\
+\text{\textbf{w}}\\
+\vert\\
+b
+\end{bmatrix}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
+, 
+\begin_inset Formula $\text{\textbf{a}}=\begin{bmatrix}0\\
+0\\
+\vdots\\
+0
+\end{bmatrix}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsection*
-Q1.b
-\end_layout
-
-\begin_layout Itemize
-Let 
-\begin_inset Formula $h^{*}$
+, 
+\begin_inset Formula $A=\begin{bmatrix}- & -\text{\textbf{x}}_{1} & - & -1\\
+- & -\text{\textbf{x}}_{2} & - & -1\\
+ & \vdots\\
+- & -\text{\textbf{x}}_{m} & - & -1
+\end{bmatrix}$
 \end_inset
 
- be an optimal solution for the objective deduced in (a), i.e.
- 
-\begin_inset Formula $h^{*}\in\underset{h\in\H}{\text{argmax}}L_{s}\left(h\right)$
+, 
+\begin_inset Formula $\text{\textbf{d}}=\begin{bmatrix}-1\\
+-1\\
+\vdots\\
+-1
+\end{bmatrix}$
 \end_inset
 
 .
 \end_layout
 
+\end_deeper
 \begin_layout Itemize
-First, notice that an 
-\begin_inset Formula $h\in\H$
+
+\series bold
+Proof:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Let 
+\begin_inset Formula $\text{\textbf{w}}^{*}$
 \end_inset
 
- that maximizes 
-\begin_inset Formula $\frac{1}{\left(\sqrt{2\pi\sigma^{2}}\right)^{m}}\exp\left(\sum_{i=1}^{m}-\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}\right)$
+ and 
+\begin_inset Formula $b^{*}$
 \end_inset
 
-, maximizes 
-\begin_inset Formula $\exp\left(\sum_{i=1}^{m}-\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}\right)$
-\end_inset
-
- as well.
- This is due to positivity of the scalar.
+ be some optimal solutions for the original Hard-SVM problem.
 \end_layout
 
 \begin_layout Itemize
-Moreover, since the lograithmic function is an increasing function, 
+Lets plug it into our new QP objective:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\underset{h\in\H}{argmax}\exp\left(\sum_{i=1}^{m}-\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}\right) & =\underset{h\in\H}{argmax}\log\exp\left(\sum_{i=1}^{m}-\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}\right)\\
- & =\underset{h\in\H}{argmax}-\sum_{i=1}^{m}\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}
+\frac{1}{2}\begin{bmatrix}\vert\\
+\text{\textbf{w}}^{*}\\
+\vert\\
+b^{*}
+\end{bmatrix}^{T}\begin{bmatrix}1\\
+ & 1\\
+ &  & \ddots\\
+ &  &  & 1\\
+ &  &  &  & 0
+\end{bmatrix}\begin{bmatrix}\vert\\
+\text{\textbf{w}}^{*}\\
+\vert\\
+b^{*}
+\end{bmatrix}+\text{\textbf{\ensuremath{\begin{bmatrix}0\\
+0\\
+\vdots\\
+0
+\end{bmatrix}}}}^{T}\text{\textbf{\begin{bmatrix}\vert\\
+ \text{\textbf{w}}^{*}\\
+ \vert\\
+ b^{*}
+\end{bmatrix}}} & =\frac{1}{2}\begin{bmatrix}\vert\\
+\text{\textbf{w}}^{*}\\
+\vert\\
+b^{*}
+\end{bmatrix}^{T}\begin{bmatrix}\vert\\
+\text{\textbf{w}}^{*}\\
+\vert\\
+b^{*}
+\end{bmatrix}+0\\
+ & =\frac{1}{2}\left[\left\langle \right\rangle \right]\begin{bmatrix}\vert\\
+\text{\textbf{w}}^{*}\\
+\vert\\
+b^{*}
+\end{bmatrix}^{T}\begin{bmatrix}\vert\\
+\text{\textbf{w}}^{*}\\
+\vert\\
+b^{*}
+\end{bmatrix}+0
 \end{align*}
 
 \end_inset
@@ -278,58 +350,8 @@ Moreover, since the lograithmic function is an increasing function,
 
 \end_layout
 
-\begin_layout Itemize
-Now, if we flip the sign, we get:
-\begin_inset Formula 
-\[
-\underset{h\in\H}{argmax}-\sum_{i=1}^{m}\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}=\underset{h\in\H}{argmin}\sum_{i=1}^{m}\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Dropping the (positive) constant, we get:
-\begin_inset Formula 
-\[
-\underset{h\in\H}{argmin}\sum_{i=1}^{m}\frac{\left(y_{i}-h\left(x_{i}\right)\right)^{2}}{2\sigma^{2}}=\underset{h\in\H}{argmin}\sum_{i=1}^{m}\left(y_{i}-h\left(x_{i}\right)\right)^{2}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-To conclude, we got:
-\begin_inset Formula 
-\[
-\underset{h\in\H}{argmax}L_{S}\left(h\right)=\underset{h\in\H}{argmin}\sum_{i=1}^{m}\left(y_{i}-h\left(x_{i}\right)\right)^{2}=\underset{h\in\H}{argmin}\tilde{L}_{S}\left(h\right)
-\]
-
-\end_inset
-
-Where 
-\begin_inset Formula $\tilde{L}_{S}$
-\end_inset
-
- is the mean square loss.
- Finding its minimizer is exactly the objective in linear regression.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula $\qed$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q2.a
-\end_layout
-
+\end_deeper
+\end_deeper
 \begin_layout Standard
 \begin_inset Note Note
 status open
@@ -344,7 +366,7 @@ co
 \end_layout
 
 \begin_layout Subsection*
-Q2.b
+Q2
 \end_layout
 
 \begin_layout Standard
@@ -361,70 +383,21 @@ co
 \end_layout
 
 \begin_layout Section*
-ROC Curve and Random Classification
+SVM and Generalization
 \end_layout
 
 \begin_layout Subsection*
 Q3.a
 \end_layout
 
-\begin_layout Itemize
-Since 
-\begin_inset Formula $h_{t}\left(x\right)$
-\end_inset
+\begin_layout Subsection*
+\begin_inset Note Note
+status open
 
- is defined with no regard to 
-\begin_inset Formula $y$
-\end_inset
-
-, we get that 
-\begin_inset Formula $\p_{\D}\left(h_{t}\left(x\right)=1\mid y\right)=\p_{\D}\left(h_{t}\left(x\right)=1\right)$
-\end_inset
-
-.
+\begin_layout Plain Layout
+co
 \end_layout
 
-\begin_layout Itemize
-Now, since 
-\begin_inset Formula $h_{t}\left(x\right)$
-\end_inset
-
- doesn't take 
-\begin_inset Formula $x$
-\end_inset
-
- into account, we get that 
-\begin_inset Formula 
-\begin{align*}
-\p_{\D}\left(h_{t}\left(x\right)=1\right) & =\p_{Z\sim U\left[0,1\right]}\left(Z\ge t\right)\\
- & =1-t
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Since we want 
-\begin_inset Formula $1-t=p$
-\end_inset
-
-, we get that 
-\begin_inset Formula $t$
-\end_inset
-
- needs to be 
-\begin_inset Formula $1-p$
-\end_inset
-
- in order to obtain 
-\begin_inset Formula $\tpr\left(t\right)=p$
-\end_inset
-
-.
- 
-\begin_inset Formula $\qed$
 \end_inset
 
 
@@ -434,29 +407,21 @@ Since we want
 Q3.b
 \end_layout
 
-\begin_layout Itemize
-Since 
-\begin_inset Formula $\p_{\D}\left(h_{t}\left(x\right)\mid y=0\right)=\p_{\D}\left(h_{t}\left(x\right)\right)$
-\end_inset
+\begin_layout Standard
+\begin_inset Note Note
+status open
 
-, we can use the same calculation above and get that 
-\begin_inset Formula $\fpr\left(t\right)=p$
-\end_inset
-
-.
+\begin_layout Plain Layout
+co
 \end_layout
 
-\begin_layout Itemize
-The ROC curve in this case would be the graph of 
-\begin_inset Formula $f\left(x\right)=x$
-\end_inset
-
-.
- 
-\begin_inset Formula $\qed$
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection*
+Q4
 \end_layout
 
 \begin_layout Standard
@@ -473,58 +438,7 @@ co
 \end_layout
 
 \begin_layout Subsection*
-Q4.b
-\end_layout
-
-\begin_layout Itemize
-Recall that the ROC curve can be defined as the 
-\begin_inset Formula $\tpr$
-\end_inset
-
- as a function of the 
-\begin_inset Formula $\fpr$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Define 
-\begin_inset Formula $f\left(p\right)=\frac{1}{1-\gamma}-p\cdot\frac{\gamma}{1-\gamma}$
-\end_inset
-
-.
- That is, 
-\begin_inset Formula $f$
-\end_inset
-
- is a function that takes a 
-\begin_inset Formula $\tpr$
-\end_inset
-
- and calculates the 
-\begin_inset Formula $\fpr$
-\end_inset
-
-.
- This is derived from the revious question.
-\end_layout
-
-\begin_layout Itemize
-Since this is a non-increasing linear polynomial of the 
-\begin_inset Formula $\tpr$
-\end_inset
-
-, then it's inverse - a linear polynomial of the 
-\begin_inset Formula $\fpr$
-\end_inset
-
-, is non-decreasing.
- 
-\begin_inset Formula $\qed$
-\end_inset
-
-
+Q5
 \end_layout
 
 \begin_layout Standard
@@ -541,294 +455,7 @@ co
 \end_layout
 
 \begin_layout Subsection*
-Q5.a
-\end_layout
-
-\begin_layout Itemize
-Assume an LDA model of the data.
- Namely, 
-\begin_inset Formula $X\mid Y=0\sim\N\left(\mu_{0},\Sigma\right)$
-\end_inset
-
- and 
-\begin_inset Formula $X\mid Y=1\sim\N\left(\mu_{1},\Sigma\right)$
-\end_inset
-
-.
- Also, denote the marginal distributions 
-\begin_inset Formula $\D\left[Y=0\right]=\pi_{0}$
-\end_inset
-
- and 
-\begin_inset Formula $\D\left[Y=1\right]=\pi_{1}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Recall that the Bayes optimal classifier is defined to be:
-\begin_inset Formula 
-\begin{align*}
-f_{\D}\left(x\right) & =\underset{y\in\left\{ 0,1\right\} }{\argmax}\D\left[Y=y\mid X=x\right]\\
- & =\begin{cases}
-1 & \D\left[Y=1\mid X=x\right]\ge\frac{1}{2}\\
-0 & else
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Also, recall a result we saw in recitation:
-\begin_inset Formula 
-\begin{align*}
-h_{\D}\left(x\right) & =\underset{y\in\left\{ 0,1\right\} }{\argmax}\left[x^{T}\Sigma^{-1}\mu_{y}-\frac{1}{2}\mu_{y}^{T}\Sigma^{-1}\mu_{y}+\log\left(\pi_{y}\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Given an 
-\begin_inset Formula $x$
-\end_inset
-
-, denote 
-\begin_inset Formula $\Psi\left(y\right)=x^{T}\Sigma^{-1}\mu_{y}-\frac{1}{2}\mu_{y}^{T}\Sigma^{-1}\mu_{y}+\log\left(\pi_{y}\right)$
-\end_inset
-
-, and notice that we want to get the following:
-\begin_inset Formula 
-\[
-h_{\D}\left(x\right)=\begin{cases}
-1 & \Psi\left(1\right)\ge\Psi\left(0\right)\\
-0 & else
-\end{cases}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-We can rephrase this and get:
-\begin_inset Formula 
-\[
-h_{\D}\left(x\right)=\sign\left(\Psi\left(1\right)-\Psi\left(0\right)\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-We have that: 
-\begin_inset Formula 
-\begin{align*}
-\sign\left(\Psi\left(1\right)-\Psi\left(0\right)\right) & =\sign\left(\Psi\left(1\right)-\Psi\left(0\right)\right)\\
- & =\sign\left(\Psi\left(1\right)-\Psi\left(0\right)\right)\\
- & =\sign\left(x^{T}\Sigma^{-1}\mu_{1}-\frac{1}{2}\mu_{1}^{T}\Sigma^{-1}\mu_{1}+\log\left(\pi_{1}\right)-x^{T}\Sigma^{-1}\mu_{0}+\frac{1}{2}\mu_{0}^{T}\Sigma^{-1}\mu_{0}-\log\left(\pi_{0}\right)\right)\\
- & =\sign\left(x^{T}\Sigma^{-1}\left(\mu_{1}-\mu_{0}\right)-\frac{1}{2}\left(\mu_{1}^{T}-\mu_{0}^{T}\right)\Sigma^{-1}\left(\mu_{1}-\mu_{0}\right)+\log\left(\nicefrac{\pi_{1}}{\pi_{0}}\right)\right)\\
- & =\sign\left(\left\langle \left(x;1\right),\left(w';b\right)\right\rangle \right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-Where 
-\begin_inset Formula $w'=\Sigma^{-1}\left(\mu_{1}-\mu_{0}\right)$
-\end_inset
-
- and 
-\begin_inset Formula $b=-\frac{1}{2}\left(\mu_{1}^{T}-\mu_{0}^{T}\right)\Sigma^{-1}\left(\mu_{1}-\mu_{0}\right)+\log\left(\nicefrac{\pi_{1}}{\pi_{0}}\right)$
-\end_inset
-
-.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-To conclude, 
-\begin_inset Formula $w=\left(w';b\right)$
-\end_inset
-
-.
- 
-\begin_inset Formula $\qed$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Theorem
-bla bla
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-sdgsdfg
-\end_layout
-
-\begin_layout Enumerate
-fdgsdfg
-\end_layout
-
-\begin_layout Enumerate
-fdgdfg
-\end_layout
-
-\end_deeper
-\begin_layout Proof
-yo yo yo
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-I said
-\end_layout
-
-\begin_layout Enumerate
-yo
-\end_layout
-
-\begin_layout Enumerate
-woohoo
-\end_layout
-
-\end_deeper
-\begin_layout Proof
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q5.b.1
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q5.b.2
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q5.b.3
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q5.b.4
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q5.b.5
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q5.b.6
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q5.b.7
+Q6
 \end_layout
 
 \begin_layout Standard
@@ -845,11 +472,11 @@ co
 \end_layout
 
 \begin_layout Section*
-Some Important Little Questions
+Separate the Inseparable - Adaboost
 \end_layout
 
 \begin_layout Subsection*
-Q6.a
+Q7
 \end_layout
 
 \begin_layout Standard
@@ -866,7 +493,7 @@ co
 \end_layout
 
 \begin_layout Subsection*
-Q6.b
+Q8
 \end_layout
 
 \begin_layout Standard
@@ -883,7 +510,7 @@ co
 \end_layout
 
 \begin_layout Subsection*
-Q6.c
+Q9
 \end_layout
 
 \begin_layout Standard
@@ -900,7 +527,41 @@ co
 \end_layout
 
 \begin_layout Subsection*
-Q6.d
+Q10
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+co
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Q11
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+co
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Q12
 \end_layout
 
 \begin_layout Standard
@@ -917,7 +578,96 @@ co
 \end_layout
 
 \begin_layout Section*
-Hands-on
+Face Classification
+\end_layout
+
+\begin_layout Subsection*
+Q13
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+co
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Q14
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+co
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Q15
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+co
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Q16
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+co
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Q17
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+co
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Q18
 \end_layout
 
 \begin_layout Standard
