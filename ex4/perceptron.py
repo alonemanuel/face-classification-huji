@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import garcon as gc
 
 
-class perceptron:
+class Perceptron:
     def __init__(self):
         gc.log("Creating perceptron")
         self._X_train = None
@@ -14,31 +14,28 @@ class perceptron:
         self._signs = None
 
     def init_weights(self, size):
+        gc.log("Initting weights")
         self._curr_w = np.zeros([size, 1])
+        print("Weights:")
+        print(self._curr_w)
 
     def get_inner(self):
         self._inner_vec = np.matmul(self._X_train, self._curr_w)
 
     def get_signs(self):
-        gc.log("Getting signs")
-        print(self._inner_vec)
-        print(self._y_train)
         self._signs =  self._y_train.T* self._inner_vec
-        print(self._signs)
 
     def check_and_update(self):
         # Vector of indices that point to signs that are smaller or equal to
         # zero. These are considered "bad indices".
-        # bad_idxs = self._signs[np.where(self._signs <= 0)]
-        print(self._signs)
-        bad_idxs = self._signs[self._signs<=0]
+        bad_idxs = np.where(self._signs<=0)[0]
+        # bad_idxs = self._signs[self._signs<=0]
         # If there are no bad indices, we succeeded.
-        print(bad_idxs)
         if bad_idxs.shape[0] == 0:
             return True
         else:
             # If there are bad indices, we should update and return false.
-            some_idx = 0
+            some_idx = bad_idxs[0]
             self._curr_w += self._y_train[0][some_idx] * np.array(
                     [self._X_train[some_idx]]).T
             return False
@@ -49,11 +46,18 @@ class perceptron:
         self._X_train = np.c_[X, np.ones(X.shape[0])]
         self._y_train = np.array([y])
         np.append(self._y_train[0], 0)
+        print("X train:")
+        print(self._X_train)
+        print("y train:")
+        print(self._y_train)
         self.init_weights(self._X_train.shape[1])
         while True:
-            # TODO: Plot perceptron converging
             self.get_inner()
+            print("Inner:")
+            print(self._inner_vec)
             self.get_signs()
+            print("Signs:")
+            print(self._signs)
             if self.check_and_update():
                 return self._curr_w
 

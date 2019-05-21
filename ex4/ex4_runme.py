@@ -10,16 +10,17 @@ Date: February, 2019
 
 """
 import numpy as np
-from ex4.ex4_tools import DecisionStump, decision_boundaries, generate_data, \
+from ex4_tools import DecisionStump, decision_boundaries, generate_data, \
     load_images
 import matplotlib.pyplot as plt
-from ex4.adaboost import AdaBoost
-from ex4.perceptron impoty Perceptron
-from ex4.face_detection import integral_image, WeakImageClassifier
+from adaboost import AdaBoost
+import comparer as cmp
+from face_detection import integral_image, WeakImageClassifier
 
 
 def Q4():
-    perc
+    comp = cmp.Comparer()
+    comp.compare_many()
     'TODO complete this function'
 
 
@@ -35,8 +36,8 @@ def Q8():
     ada = [AdaBoost(WL, t) for t in T]
     test_n_samples, test_noise = 200, 0
     test_X, test_y = generate_data(test_n_samples, test_noise)
-    training_err =
-    test_err =
+    # training_err =
+    # test_err =
     'TODO complete this function'
 
 
