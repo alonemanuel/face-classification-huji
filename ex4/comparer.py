@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 
 DIM = 2
 
-FIG_DIR = '../Images/'
+FIG_DIR1 = '../Images1/'
+FIG_DIR2 = '../Images2/'
 
 
 class Comparer:
@@ -25,8 +26,8 @@ class Comparer:
         return np.random.multivariate_normal(mean=self._mu, cov=self._sig,
                                              size=m).T
 
-    def plot_to_file(self, fn):
-        plt.savefig(FIG_DIR + fn)
+    def plot_to_file(self, fn, dirnum=1):
+        plt.savefig((FIG_DIR1 if dirnum == 1 else FIG_DIR2) + fn)
 
     def true_label(self, x, y):
         true_w = np.array([0.3, -0.5])
@@ -42,7 +43,7 @@ class Comparer:
         a = -w[0] / w[1]
         xx = np.linspace(-2.5, 2.5)
         yy = a * xx - (classifier.intercept_[0] / w[1])
-        plt.plot(xx, yy, label='SVM',color='red')
+        plt.plot(xx, yy, label='SVM', color='red')
 
     def draw_perc_hyp(self, X, y):
         gc.log("Drawing Perceptron")
@@ -50,9 +51,16 @@ class Comparer:
         a = -w[0] / w[1]
         xx = np.linspace(-2.5, 2.5)
         yy = a * xx - (w[-1] / w[1])
-        plt.plot(xx, yy, label='Perceptron', color='purple')
+        plt.plot(xx, yy, label='Perceptron', color='green')
 
-    def init_plot(self,m):
+    def draw_true_hyp(self):
+        w = np.array([[0.3], [-0.5], [0.1]])
+        a = -w[0] / w[1]
+        xx = np.linspace(-2.5, 2.5)
+        yy = a * xx - (w[-1] / w[1])
+        plt.plot(xx, yy, label='Real', color='black')
+
+    def init_plot(self, m):
         fig = plt.figure()
         fig.suptitle("SVM vs Perceptron, " + str(m) + " Samples")
         plt.xlabel('x Coordinate')
@@ -74,6 +82,7 @@ class Comparer:
                     marker='x')
         self.draw_svm_hyp(points, raw_labels)
         self.draw_perc_hyp(points, raw_labels)
+        self.draw_true_hyp()
         plt.legend()
         self.plot_to_file('svm_vs_perc_' + str(m))
 
@@ -81,3 +90,44 @@ class Comparer:
         gc.log("Comparing many")
         for m in [5, 10, 15, 25, 70]:
             self.compare_one(m)
+
+    def big_test(self):
+        gc.log("Big test")
+        fig = plt.figure()
+        fig.suptitle("Results")
+        plt.xlabel('x Coordinate')
+        plt.ylabel('y Coordinate')
+        # points = self.draw_m_points(m)
+        # raw_labels = np.array([[self.true_label(x, y) for x, y in points.T]])
+        # labels = np.vstack((points, raw_labels)).T
+        # good_points = labels[labels[:, 2] == 1]
+        # bad_points = labels[labels[:, 2] != 1]
+        # # good_points = labels[bool_labels]
+        # # bad_points = labels[not bool_labels]
+        # plt.scatter(good_points[:, 0], good_points[:, 1], label='True',
+        #             marker='x')
+        # plt.scatter(bad_points[:, 0], bad_points[:, 1], label='False',
+        #             marker='x')
+        # self.draw_svm_hyp(points, raw_labels)
+        # self.draw_perc_hyp(points, raw_labels)
+        # self.draw_true_hyp()
+        # plt.legend()
+        # self.plot_to_file('svm_vs_perc_' + str(m))
+
+        gc.log("Big compare")
+        k = 10000
+        for m in [5, 10, 15, 25, 70]:
+            for i in range(500):
+                points = self.draw_m_points(m + k)
+                raw_labels = np.array([[self.true_label(x, y) for x,
+                                                                  y
+                                        in points.T]])
+
+                x_and_y = np.vstack((points, raw_labels)).T
+                train_points = x_and_y[:m]
+                test_points = x_and_y[m:]
+                svm =
+                good_points = train_points[train_points[:, 2] == 1]
+                bad_points = train_points[train_points[:, 2] != 1]
+                # TODO: Draw unique labeled training set
+            test_X = self.draw_m_points(k)

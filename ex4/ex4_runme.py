@@ -25,19 +25,33 @@ def Q4():
 
 
 def Q5():
+    comp = cmp.Comparer()
+    comp.big_test()
     'TODO complete this function'
 
 
 def Q8():
-    n_samples, noise = 5000, 0
+    n_samples, noise,T = 5000, 0,500
     X, y = generate_data(n_samples, noise)
     D = np.array([1.0 / n_samples] * n_samples)
-    WL, T = DecisionStump(D, X, y), np.arange(500)
-    ada = [AdaBoost(WL, t) for t in T]
+    WL = DecisionStump(D, X, y)
+    ada  = AdaBoost(WL, T)
+    ada.train(X, y)
+    fig = plt.figure()
+    plt.scatter(X[:, 0], X[:, 1])
+    plt.show()
     test_n_samples, test_noise = 200, 0
     test_X, test_y = generate_data(test_n_samples, test_noise)
-    # training_err =
-    # test_err =
+    train_err = np.apply_along_axis(ada.error, 0, np.array([np.arange(T)]),
+                                    X, y)
+    # train_err = ada.error(X,y, np.arange(T))
+    # fig = plt.plot()
+    # for t in range(T):
+    #     train_err = ada.error(X, y, t)
+    #     plt.plot(np.arange(T),train_err)
+    #     # test_err = ada.get_test_err(test_X,test_y)
+
+
     'TODO complete this function'
 
 
@@ -66,7 +80,7 @@ def Q18():
 
 
 if __name__ == '__main__':
-    Q4()
+    # Q4()
     Q5()
-    Q8()
+    # Q8()
     'TODO complete this function'

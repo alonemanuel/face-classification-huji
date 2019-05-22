@@ -16,8 +16,6 @@ class Perceptron:
     def init_weights(self, size):
         gc.log("Initting weights")
         self._curr_w = np.zeros([size, 1])
-        print("Weights:")
-        print(self._curr_w)
 
     def get_inner(self):
         self._inner_vec = np.matmul(self._X_train, self._curr_w)
@@ -46,18 +44,10 @@ class Perceptron:
         self._X_train = np.c_[X, np.ones(X.shape[0])]
         self._y_train = np.array([y])
         np.append(self._y_train[0], 0)
-        print("X train:")
-        print(self._X_train)
-        print("y train:")
-        print(self._y_train)
         self.init_weights(self._X_train.shape[1])
         while True:
             self.get_inner()
-            print("Inner:")
-            print(self._inner_vec)
             self.get_signs()
-            print("Signs:")
-            print(self._signs)
             if self.check_and_update():
                 return self._curr_w
 
