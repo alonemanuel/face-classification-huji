@@ -39,7 +39,7 @@ def Q8():
     ada.train(X, y)
     fig = plt.figure()
     plt.scatter(X[:, 0], X[:, 1])
-    plt.show()
+    # plt.show()
     test_n_samples, test_noise = 200, 0
     test_X, test_y = generate_data(test_n_samples, test_noise)
     train_err = np.apply_along_axis(ada.error, 0, np.array([np.arange(T)]),

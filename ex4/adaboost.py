@@ -37,7 +37,15 @@ class AdaBoost(object):
         After finish the training return the weights of the samples in the last iteration.
         """
         m = X.shape[0]
-        D = np.array([[1.0 / m] * m] * self.T)
+        D = []
+        for i in range(self.T):
+            r=[]
+            for j in range(m):
+                r.append(1.0/m)
+            D.append(r)
+
+        D = np.array(D)
+        # D = np.array([[1.0 / m] * m] * self.T)
         for t in range(self.T - 1):
             self.WL.train(D[t], X, y)
             self.h[t] = self.WL.predict
@@ -63,7 +71,7 @@ class AdaBoost(object):
             print()
             print()
 
-        self.h[self.T-1] = self.WL.predict
+        self.h[self.T] = self.WL.predict
         return self.w[self.T - 1]
 
         # TODO complete this function
