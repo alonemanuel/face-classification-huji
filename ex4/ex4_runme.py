@@ -9,6 +9,9 @@ Author: Gad Zalcberg
 Date: February, 2019
 
 """
+import garcon as gc
+import time
+
 import numpy as np
 from ex4_tools import DecisionStump, decision_boundaries, generate_data, \
     load_images
@@ -31,11 +34,11 @@ def Q5():
 
 
 def Q8():
-    n_samples, noise,T = 5000, 0,500
+    n_samples, noise, T = 5000, 0, 500
     X, y = generate_data(n_samples, noise)
     D = np.array([1.0 / n_samples] * n_samples)
     WL = DecisionStump(D, X, y)
-    ada  = AdaBoost(WL, T)
+    ada = AdaBoost(WL, T)
     ada.train(X, y)
     fig = plt.figure()
     plt.scatter(X[:, 0], X[:, 1])
@@ -50,7 +53,6 @@ def Q8():
     #     train_err = ada.error(X, y, t)
     #     plt.plot(np.arange(T),train_err)
     #     # test_err = ada.get_test_err(test_X,test_y)
-
 
     'TODO complete this function'
 
@@ -80,7 +82,9 @@ def Q18():
 
 
 if __name__ == '__main__':
-    # Q4()
+    start_time = time.time()
+    Q4()
     Q5()
     # Q8()
+    gc.log('Execution took %s seconds' % (time.time() - start_time))
     'TODO complete this function'

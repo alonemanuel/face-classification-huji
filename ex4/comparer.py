@@ -22,7 +22,6 @@ class Comparer:
         self._sig = np.eye(DIM)
 
     def draw_m_points(self, m):
-        # gc.log("Drawing ", m, " points")
         return np.random.multivariate_normal(mean=self._mu, cov=self._sig,
                                              size=m).T
 
@@ -36,7 +35,6 @@ class Comparer:
         return np.sign(real_val)
 
     def draw_svm_hyp(self, X, y):
-        gc.log("Drawing SVM")
         classifier = self._svm.fit(X.T, np.ravel(y))
         w = classifier.coef_[0]
         a = -w[0] / w[1]
@@ -52,14 +50,12 @@ class Comparer:
 
     def get_perc_accu(self, perc_w, X, y):
         X_1 = np.c_[X, np.ones(X.shape[0])]
-        # val = np.array([np.zeros(X.shape[0])])
         val = np.matmul(X_1, perc_w)
         labeled = np.sign(val)
         return np.sum(labeled == np.ravel(y.T)) / X.shape[0]
 
     def draw_perc_hyp(self, X, y):
-        gc.log("Drawing Perceptron")
-        w = self._perc.fit(X.T, np.ravel(y))
+        w = self._perc.fit(X.T, y)
         a = -w[0] / w[1]
         xx = np.linspace(-2.5, 2.5)
         yy = a * xx - (w[-1] / w[1])
@@ -79,15 +75,12 @@ class Comparer:
         plt.ylabel('y Coordinate')
 
     def compare_one(self, m):
-        gc.log("Comparing one")
         self.init_plot(m)
         points = self.draw_m_points(m)
-        raw_labels = np.array([[self.true_label(x, y) for x, y in points.T]])
-        labels = np.vstack((points, raw_labels)).T
+        raw_labels = self.true_label(points.T)
+        labels = np.hstack((points.T, raw_labels))
         good_points = labels[labels[:, 2] == 1]
         bad_points = labels[labels[:, 2] != 1]
-        # good_points = labels[bool_labels]
-        # bad_points = labels[not bool_labels]
         plt.scatter(good_points[:, 0], good_points[:, 1], label='True',
                     marker='x')
         plt.scatter(bad_points[:, 0], bad_points[:, 1], label='False',

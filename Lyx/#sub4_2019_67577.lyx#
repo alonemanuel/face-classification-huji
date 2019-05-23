@@ -408,31 +408,43 @@ Q4
 
 \begin_layout Standard
 \begin_inset Graphics
-	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images/svm_vs_perc_5.png
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_5.png
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
-	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images/svm_vs_perc_10.png
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_10.png
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
-	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images/svm_vs_perc_15.png
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_15.png
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
-	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images/svm_vs_perc_25.png
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_25.png
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
-	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images/svm_vs_perc_70.png
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_70.png
 
 \end_inset
 
@@ -454,6 +466,29 @@ co
 
 \begin_layout Subsection*
 Q5
+\end_layout
+
+\begin_layout Itemize
+In the following graph we can see that the SVM did better than the Perceptron.
+\end_layout
+
+\begin_layout Itemize
+This is mostly due to the fact that the SVM finds the separating line which
+ has the largest margin, while the perceptron finds any separating line
+ (the first one it finds).
+\end_layout
+
+\begin_layout Itemize
+A bigger margin translates into a better generalizing line, hence the results.
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images2/q5.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

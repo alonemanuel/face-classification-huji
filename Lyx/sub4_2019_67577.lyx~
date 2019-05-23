@@ -203,7 +203,12 @@ We claim that the following QP problem's objective is equivalent to the
 \text{\textbf{w}}\\
 \vert\\
 b
-\end{bmatrix}^{T}I_{n}\begin{bmatrix}\vert\\
+\end{bmatrix}^{T}\begin{bmatrix}1\\
+ & 1\\
+ &  & \ddots\\
+ &  &  & 1\\
+ &  &  &  & 0
+\end{bmatrix}\begin{bmatrix}\vert\\
 \text{\textbf{w}}\\
 \vert\\
 b
@@ -238,7 +243,12 @@ b
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $Q=I_{n}$
+\begin_inset Formula $Q=\begin{bmatrix}1\\
+ & 1\\
+ &  & \ddots\\
+ &  &  & 1\\
+ &  &  &  & 0
+\end{bmatrix}$
 \end_inset
 
 , 
@@ -332,17 +342,9 @@ b^{*}
 \end{bmatrix}^{T}\begin{bmatrix}\vert\\
 \text{\textbf{w}}^{*}\\
 \vert\\
-b^{*}
+0
 \end{bmatrix}+0\\
- & =\frac{1}{2}\left[\left\langle \right\rangle \right]\begin{bmatrix}\vert\\
-\text{\textbf{w}}^{*}\\
-\vert\\
-b^{*}
-\end{bmatrix}^{T}\begin{bmatrix}\vert\\
-\text{\textbf{w}}^{*}\\
-\vert\\
-b^{*}
-\end{bmatrix}+0
+ & =\frac{1}{2}\norm{\text{\textbf{w}}^{*}}
 \end{align*}
 
 \end_inset
@@ -351,32 +353,46 @@ b^{*}
 \end_layout
 
 \end_deeper
-\end_deeper
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
+\begin_layout Itemize
+Since 
+\begin_inset Formula $\text{\textbf{w}}^{*}$
 \end_inset
 
+ optimizes 
+\begin_inset Formula $\norm{\text{\textbf{v}}}$
+\end_inset
 
+, it also optimizes 
+\begin_inset Formula $\frac{1}{2}\norm{\text{\textbf{w}}^{*}}$
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Subsection*
-Q2
+\begin_layout Itemize
+Moreover, the restriction from the original objective can be rewritten linearly
+ as we've done: 
+\begin_inset Formula $\begin{bmatrix}- & -\text{\textbf{x}}_{1} & - & -1\\
+- & -\text{\textbf{x}}_{2} & - & -1\\
+ & \vdots\\
+- & -\text{\textbf{x}}_{m} & - & -1
+\end{bmatrix}\begin{bmatrix}\vert\\
+\text{\textbf{w}}\\
+\vert\\
+b
+\end{bmatrix}\ensuremath{\le\begin{bmatrix}-1\\
+-1\\
+\vdots\\
+-1
+\end{bmatrix}}$
+\end_inset
+
+.
 \end_layout
 
+\end_deeper
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
+\begin_inset Formula $\qed$
 \end_inset
 
 
