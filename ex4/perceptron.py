@@ -46,11 +46,10 @@ class Perceptron:
         while True:
             signs = np.sign(np.matmul(X_1, w))
             comp_idxs = np.where(signs != np.ravel(y.T))[0]
-            # print('Comp:')
-            # print(np.ravel(y.T))
             if comp_idxs.shape[0] == 0:
                 return w
             w += y[comp_idxs[0], 0] * X_1[comp_idxs[0]]
+
 
 
     def predict(self, x):
