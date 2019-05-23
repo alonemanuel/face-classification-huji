@@ -40,6 +40,7 @@ class AdaBoost(object):
         D = np.array([1.0 / n_samples] * n_samples)
         # D = np.array([[1.0 / m] * m] * self.T)
         for t in range(self.T):
+            gc.log(f'At T = {t}')
             self.h[t] = self.WL(D, X, y)
             y_hat = self.h[t].predict(X)
             mask = y != y_hat

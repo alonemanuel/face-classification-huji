@@ -84,6 +84,26 @@ def Q12():
 
 
 def Q17():
+    train_images, test_images, train_labels, test_labels = load_images(
+            '../Docs/')
+    train_images = integral_image(train_images)
+    test_images = integral_image(test_images)
+    WL, T = WeakImageClassifier, 50
+    ada = AdaBoost(WL, T)
+    ada.train(train_images, train_labels)
+    T_range = np.arange(1, T)
+    train_errs = [ada.error(train_images, train_labels, t) for t in T_range]
+    test_errs = [ada.error(test_images, test_labels, t) for t in T_range]
+
+    fig = plt.figure()
+    fig.suptitle("Train vs Test error, Face Classifier")
+    plt.xlabel('# of Hypotheses (T)')
+    plt.ylabel('Error rate (%)')
+    plt.plot(T_range, train_errs, label='Train Error')
+    plt.plot(T_range, test_errs, label='Test Error')
+    # plt.ylim(top=0.06)
+    plt.legend()
+    plt.savefig(FIG_DIR3 + 'q17')
     'TODO complete this function'
 
 
@@ -95,8 +115,9 @@ if __name__ == '__main__':
     start_time = time.time()
     # Q4()
     # Q5()
-    learner , test_X, test_y= Q8()
-    Q9(learner, test_X, test_y)
-    Q10()
+    # learner, test_X, test_y = Q8()
+    # Q9(learner, test_X, test_y)
+    # Q10()
+    Q17()
     gc.log('Execution took %s seconds' % (time.time() - start_time))
     'TODO complete this function'

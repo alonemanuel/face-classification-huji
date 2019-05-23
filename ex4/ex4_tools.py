@@ -19,10 +19,18 @@ from sklearn.model_selection import train_test_split
 
 
 def find_threshold(D, X, y, sign, j):
+    """
+    Finds the best threshold.
+    D =  distribution
+    S = (X, y) the data
+    """
+    # sort the data so that x1 <= x2 <= ... <= xm
     sort_idx = np.argsort(X[:, j])
     X, y, D = X[sort_idx], y[sort_idx], D[sort_idx]
+
     thetas = np.concatenate([[-np.inf], (X[1:, j] + X[:-1, j]) / 2, [np.inf]])
-    minimal_theta_loss = np.sum(D[y == sign])
+    minimal_theta_loss = np.sum(D[y == sign]) #loss of the smallest possible
+    # theta
     losses = np.append(minimal_theta_loss, minimal_theta_loss - np.cumsum(D * (y * sign)))
     min_loss_idx = np.argmin(losses)
     return losses[min_loss_idx], thetas[min_loss_idx]
@@ -63,7 +71,8 @@ class DecisionStump(object):
         -------
         y_hat : a prediction vector for X shape=(num_samples)
         """
-        y_hat = self.sign * ((X[:, self.j] >= self.theta) * 2 - 1)
+
+        y_hat = self.sign * ((X[:, self.j] <= self.theta) * 2 - 1)
         return y_hat
 
 

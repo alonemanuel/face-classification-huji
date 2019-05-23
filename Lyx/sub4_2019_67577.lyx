@@ -180,6 +180,12 @@ Alon Emanuel - 205894058
 \end_inset
 
 
+\begin_inset FormulaMacro
+\newcommand{\comdots}{,\dots,}
+{,\dots,}
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
@@ -413,24 +419,36 @@ Q4
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_10.png
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_15.png
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_25.png
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Graphics
 	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images1/svm_vs_perc_70.png
 
@@ -623,12 +641,37 @@ Face Classification
 Q13
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
+\begin_layout Itemize
+First of all, w.l.o.g assume 
+\begin_inset Formula $\left(a,b\right)$
+\end_inset
+
+ isn't an edge pixel (the other case can be handled with minor adjustments).
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Float algorithm
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-co
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Calculating 
+\begin_inset Formula $S\left(a,b\right)$
+\end_inset
+
+ in 
+\begin_inset Formula $O\left(n\right)$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -636,10 +679,264 @@ co
 
 \end_layout
 
+\begin_layout Enumerate
+Initialize 
+\begin_inset Formula $sum\leftarrow0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For 
+\begin_inset Formula $i$
+\end_inset
+
+ in 
+\begin_inset Formula $0\comdots a-1$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Update 
+\begin_inset Formula $sum\leftarrow sum+I\left(i,b\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+For 
+\begin_inset Formula $j$
+\end_inset
+
+ in 
+\begin_inset Formula $0\comdots b$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Update 
+\begin_inset Formula $sum\leftarrow sum+I\left(a,j\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Update 
+\begin_inset Formula $sum\leftarrow sum+S\left(a-1,b-1\right).$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Runtime analysis:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Stage 
+\begin_inset Formula $1$
+\end_inset
+
+: 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+Stage 
+\begin_inset Formula $2$
+\end_inset
+
+: 
+\begin_inset Formula $O\left(n\right)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+Stage 
+\begin_inset Formula $3$
+\end_inset
+
+: 
+\begin_inset Formula $O\left(n\right)$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+Stage 
+\begin_inset Formula $4$
+\end_inset
+
+: 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Overall, 
+\begin_inset Formula $O\left(n\right)$
+\end_inset
+
+, as required.
+\end_layout
+
+\end_deeper
 \begin_layout Subsection*
 Q14
 \end_layout
 
+\begin_layout Itemize
+
+\series bold
+Algorithm:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Finding Sum of Square in 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Input:
+\end_layout
+
+\begin_layout Itemize
+Integral image denoted by 
+\begin_inset Formula $S$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+A square represented by four points, 
+\begin_inset Formula $P_{\Delta}=\left(a_{\Delta},b_{\Delta}\right)$
+\end_inset
+
+ for 
+\begin_inset Formula $\Delta\in\left\{ LU,LD,RU,RD\right\} $
+\end_inset
+
+ corresponding to their orientation (
+\begin_inset Formula $LU=\text{Left-Up}$
+\end_inset
+
+ etc.).
+\end_layout
+
+\begin_layout Plain Layout
+
+\series bold
+Algorithm:
+\end_layout
+
+\begin_layout Enumerate
+Initialize 
+\begin_inset Formula $sum\leftarrow S\left(P_{RD}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Update 
+\begin_inset Formula $sum\leftarrow sum-S\left(a_{LD},b_{LD}-1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Update 
+\begin_inset Formula $sum\leftarrow sum-S\left(a_{RU}-1,b_{RU}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Update 
+\begin_inset Formula $sum\leftarrow sum+S\left(a_{LU}-1,b_{LU}-1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $return$
+\end_inset
+
+ 
+\begin_inset Formula $sum$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Rational:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Similar to the Inclusion-exclusion principle, we add and subtract areas
+ of the integral image that we're not added or added twice.
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 \begin_inset Note Note
 status open
