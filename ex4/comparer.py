@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 
 DIM = 2
 
-FIG_DIR1 = '../Images1/'
-FIG_DIR2 = '../Images2/'
+FIG_DIR1 = './'
+FIG_DIR2 = './'
 
 
 class Comparer:
