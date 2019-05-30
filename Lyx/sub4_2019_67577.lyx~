@@ -457,21 +457,8 @@ Q4
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection*
-Q5
+Q5+6
 \end_layout
 
 \begin_layout Itemize
@@ -497,85 +484,40 @@ A bigger margin translates into a better generalizing line, hence the results.
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q6
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section*
 Separate the Inseparable - Adaboost
-\end_layout
-
-\begin_layout Subsection*
-Q7
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection*
 Q8
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
+\begin_layout Itemize
+The following is the graph of the error as a function of 
+\begin_inset Formula $T$
+\end_inset
 
-\begin_layout Plain Layout
-co
+, for both the train set and the test set.
 \end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q8.png
 
 \end_inset
 
 
 \end_layout
 
+\end_deeper
 \begin_layout Subsection*
 Q9
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q9.png
 
 \end_inset
 
@@ -586,30 +528,33 @@ co
 Q10
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
+\begin_layout Itemize
+As we can deduce from the graph in Q8, we see that 
+\begin_inset Formula $\hat{T}$
 \end_inset
 
+ is equal to the largest 
+\begin_inset Formula $T$
+\end_inset
 
+ we took, which is 
+\begin_inset Formula $500$
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Subsection*
-Q11
+\begin_layout Itemize
+Its test error stabilizes at 
+\begin_inset Formula $\sim0.017$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q10.png
 
 \end_inset
 
@@ -620,19 +565,176 @@ co
 Q12
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
+\begin_layout Itemize
+\begin_inset Formula $Q8$
+\end_inset
 
-\begin_layout Plain Layout
-co
+ with noise:
 \end_layout
+
+\begin_deeper
+\begin_layout Itemize
+We can see that when noise was introduced, the test error curve changed
+ from a monotonically decreasing curve, to a parabola-like curve with a
+ minimum point.
+\end_layout
+
+\begin_layout Itemize
+This is due to what's called overfitting - when the hypotheses class becomes
+ more complex, it starts to adjust to the bias (~noise), thus generalizing
+ not as good.
+\end_layout
+
+\begin_layout Itemize
+In the case of Adaboost, the comlexity is controlled by the number of classifier
+s used in predicting new data - the 
+\begin_inset Formula $X$
+\end_inset
+
+ axis in these plots.
+\end_layout
+
+\begin_layout Itemize
+Noise = 
+\begin_inset Formula $0.01$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q8_0_01.png
 
 \end_inset
 
 
 \end_layout
 
+\end_deeper
+\begin_layout Itemize
+Noise = 
+\begin_inset Formula $0.4$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q8_0_4.png
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+\begin_inset Formula $Q9$
+\end_inset
+
+ with noise:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Noise = 
+\begin_inset Formula $0.01$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q9_0_01.png
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Noise = 
+\begin_inset Formula $0.4$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q9_0_4.png
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+\begin_inset Formula $Q10$
+\end_inset
+
+ with noise:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Here, we see that 
+\begin_inset Formula $\hat{T}$
+\end_inset
+
+ is the one that hits the bias-variance tradeoff on spot.
+\end_layout
+
+\begin_layout Itemize
+Noise = 
+\begin_inset Formula $0.01$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q10_0_01.png
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Noise = 
+\begin_inset Formula $0.4$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q10_0_4.png
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Section*
 Face Classification
 \end_layout
@@ -681,62 +783,34 @@ Calculating
 
 \begin_layout Enumerate
 Initialize 
-\begin_inset Formula $sum\leftarrow0$
+\begin_inset Formula $sum\leftarrow I\left(a,b\right)$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Enumerate
-For 
-\begin_inset Formula $i$
-\end_inset
-
- in 
-\begin_inset Formula $0\comdots a-1$
-\end_inset
-
-:
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
 Update 
-\begin_inset Formula $sum\leftarrow sum+I\left(i,b\right)$
+\begin_inset Formula $sum\leftarrow sum+S\left(a-1,b\right)$
 \end_inset
 
 .
 \end_layout
 
-\end_deeper
-\begin_layout Enumerate
-For 
-\begin_inset Formula $j$
-\end_inset
-
- in 
-\begin_inset Formula $0\comdots b$
-\end_inset
-
-:
-\end_layout
-
-\begin_deeper
 \begin_layout Enumerate
 Update 
-\begin_inset Formula $sum\leftarrow sum+I\left(a,j\right)$
+\begin_inset Formula $sum\leftarrow sum+S\left(a,b-1\right)$
 \end_inset
 
 .
 \end_layout
 
-\end_deeper
 \begin_layout Enumerate
 Update 
-\begin_inset Formula $sum\leftarrow sum+S\left(a-1,b-1\right).$
+\begin_inset Formula $sum\leftarrow sum-S\left(a-1,b-1\right)$
 \end_inset
 
-
+.
 \end_layout
 
 \end_inset
@@ -767,7 +841,7 @@ Stage
 \end_inset
 
 : 
-\begin_inset Formula $O\left(n\right)$
+\begin_inset Formula $O\left(1\right)$
 \end_inset
 
 ,
@@ -779,7 +853,7 @@ Stage
 \end_inset
 
 : 
-\begin_inset Formula $O\left(n\right)$
+\begin_inset Formula $O\left(1\right)$
 \end_inset
 
 ,
@@ -799,6 +873,14 @@ Stage
 
 \begin_layout Itemize
 Overall, 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Since we do this for every entry in the image, we get 
 \begin_inset Formula $O\left(n\right)$
 \end_inset
 
@@ -937,29 +1019,36 @@ Similar to the Inclusion-exclusion principle, we add and subtract areas
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection*
 Q15
 \end_layout
 
+\begin_layout Itemize
+
+\series bold
+Algorithm:
+\end_layout
+
+\begin_deeper
 \begin_layout Standard
-\begin_inset Note Note
+\begin_inset Float algorithm
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-co
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Calculating a Haar Feature in 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -967,16 +1056,19 @@ co
 
 \end_layout
 
-\begin_layout Subsection*
-Q16
+\begin_layout Enumerate
+Calculate sum of all squares.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
+\begin_layout Enumerate
+Add up the white squares, subtract the black ones.
+\end_layout
 
-\begin_layout Plain Layout
-co
+\begin_layout Enumerate
+\begin_inset Formula $return$
+\end_inset
+
+ the result.
 \end_layout
 
 \end_inset
@@ -984,37 +1076,102 @@ co
 
 \end_layout
 
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Runtime analysis:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Stage 
+\begin_inset Formula $1$
+\end_inset
+
+, 
+\begin_inset Formula $2$
+\end_inset
+
+ and 
+\begin_inset Formula $3$
+\end_inset
+
+ all take 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+ time, thus the overall procedure takes 
+\begin_inset Formula $O\left(1\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\qed$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Subsection*
 Q17
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-co
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Q18
+Implemented and ran it, but the result aren't good...
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
+During the training, I plotted the optimal Haar features, and they all seem
+ to have an 'up' value of 
+\begin_inset Formula $0$
+\end_inset
 
-\begin_layout Plain Layout
-co
+ (= they're all locked to the top border of the image).
 \end_layout
+
+\begin_layout Standard
+Couldn't find the bit of code that caused it though.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/q17.png
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/haar1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/haar2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename E:/alon_emanuel_drive/School/Year2/Semester2/67577_IML/Exercises/Ex4/Images3/haar3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 

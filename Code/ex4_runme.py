@@ -127,12 +127,12 @@ def Q18():
 
 if __name__ == '__main__':
     start_time = time.time()
-    Q4()
-    Q5()
-    learner, test_X, test_y, train_X, train_y = Q8()
-    Q9(learner, test_X, test_y)
-    Q10(learner, train_X, train_y)
-    Q12()
+    # Q4()
+    # Q5()
+    # learner, test_X, test_y, train_X, train_y = Q8()
+    # Q9(learner, test_X, test_y)
+    # Q10(learner, train_X, train_y)
+    # Q12()
     Q17()
     gc.log('Execution took %s seconds' % (time.time() - start_time))
     'TODO complete this function'
